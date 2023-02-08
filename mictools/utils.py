@@ -37,10 +37,13 @@ def sstats(X, Y, alpha=0.6, c=15, est="mic_approx"):
 def read_table(input_fn):
     """Read table.
     """
-    
-    table = pd.read_csv(input_fn, sep='\t', index_col=0)
-    # cast index into string
-    table.index = [str(elem) for elem in table.index]
+    if(isinstance(input_fn, pd.DataFrame)):
+        table.index = [str(elem) for elem in table.index]
+    else:
+
+        table = pd.read_csv(input_fn, sep='\t', index_col=0)
+        # cast index into string
+        table.index = [str(elem) for elem in table.index]
 
     return table
 
